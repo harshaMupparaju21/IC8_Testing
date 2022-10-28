@@ -62,40 +62,43 @@ public class Urinals {
        }
    }
 
+   public static void createOutputFile(){
+       File myObj = new File("src/Urinals.dat");
+       try{
+           Scanner myReader = new Scanner(myObj);
+           while (myReader.hasNextLine()) {
+               String data = myReader.nextLine();
+               urinalList.add(data);
+           }
+           myReader.close();
+
+           String fileName = "src/rule.txt";
+           File outputFile = new File(fileName);
+
+           int count = 1;
+
+           while (outputFile.exists()) {
+               outputFile = new File("src/rule" + count + ".txt");
+               System.out.println("src/rule" + count + ".txt");
+               count++;
+           }
+           try {
+               FileWriter writer = new FileWriter(outputFile);
+               for (String str : urinalList) {
+                   writer.write(countUrinals(str)+"\n");
+               }
+               writer.close();
+           } catch (IOException e) {
+               throw new RuntimeException("File does not exist");
+           }
+
+       } catch (FileNotFoundException e) {
+           System.out.println("An error occurred.");
+           e.printStackTrace();
+       }
+   }
+
 
     public static void main(String[] args) {
-        File myObj = new File("src/Urinals.dat");
-        try{
-            Scanner myReader = new Scanner(myObj);
-            while (myReader.hasNextLine()) {
-                String data = myReader.nextLine();
-                urinalList.add(data);
-            }
-            myReader.close();
-
-            String fileName = "src/rule.txt";
-            File outputFile = new File(fileName);
-
-            int count = 1;
-
-            while (outputFile.exists()) {
-                outputFile = new File("src/rule" + count + ".txt");
-                System.out.println("src/rule" + count + ".txt");
-                count++;
-            }
-            try {
-                FileWriter writer = new FileWriter(outputFile);
-                for (String str : urinalList) {
-                    writer.write(countUrinals(str)+"\n");
-                }
-                writer.close();
-            } catch (IOException e) {
-                throw new RuntimeException("File does not exist");
-            }
-
-        } catch (FileNotFoundException e) {
-            System.out.println("An error occurred.");
-            e.printStackTrace();
-        }
-    }
+   }
 }

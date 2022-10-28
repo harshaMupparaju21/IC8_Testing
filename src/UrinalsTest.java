@@ -57,12 +57,19 @@ public class UrinalsTest {
         assertEquals(-1, Urinals.countUrinals("     "));
     }
 
+    @Test
+    void createOutputFile(){
+        Urinals.createOutputFile();
+        System.out.println("Created new File for Output");
+    }
+
+
     @Test()
      void main() {
         checkIfFileExists();
         goodString();
         badString();
         countUrinals();
-
+        createOutputFile();
     }
 }
