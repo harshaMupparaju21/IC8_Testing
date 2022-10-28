@@ -7,51 +7,55 @@ import static org.junit.jupiter.api.Assertions.*;
 public class UrinalsTest {
     @Test()
     void checkIfFileExists(){
-        Urinals urinals = new Urinals();
-        assertTrue(urinals.checkIfFileExists());
+        try {
+            Urinals urinals = new Urinals();
+            assertTrue(urinals.checkIfFileExists("Urinals.dat"));
+            assertTrue(urinals.checkIfFileExists("rule.txt"));
+            assertFalse(urinals.checkIfFileExists("urinal.dat"));
+            assertFalse(urinals.checkIfFileExists("urinals.txt"));
+            assertFalse(urinals.checkIfFileExists("rule.dat"));
+            assertFalse(urinals.checkIfFileExists("harsha.dat"));
+        } catch (NullPointerException e){
+            System.out.println("File does not exist");
+        }
     }
 
     @Test
     void goodString() {
-        Urinals urinals = new Urinals();
-        assertTrue(urinals.goodString("10001"));
-        assertTrue(urinals.goodString("1001"));
-        assertTrue(urinals.goodString("00000"));
-        assertTrue(urinals.goodString("0000"));
-        assertTrue(urinals.goodString("01000"));
+        assertTrue(Urinals.goodString("10001"));
+        assertTrue(Urinals.goodString("1001"));
+        assertTrue(Urinals.goodString("00000"));
+        assertTrue(Urinals.goodString("0000"));
+        assertTrue(Urinals.goodString("01000"));
     }
 
     @Test
     void badString() {
-        Urinals urinals = new Urinals();
-        assertFalse(urinals.goodString("011"));
-        assertFalse(urinals.goodString("10001100010"));
-        assertFalse(urinals.goodString("100201"));
-        assertFalse(urinals.goodString("00000000000000000000000000000000"));
-        assertFalse(urinals.goodString(""));
-        assertFalse(urinals.goodString("11111111111111111111111111111111"));
-        assertFalse(urinals.goodString("92393921419204"));
-        assertFalse(urinals.goodString("     "));
-        assertFalse(urinals.goodString("12417sd"));
+        assertFalse(Urinals.goodString("011"));
+        assertFalse(Urinals.goodString("10001100010"));
+        assertFalse(Urinals.goodString("100201"));
+        assertFalse(Urinals.goodString("00000000000000000000000000000000"));
+        assertFalse(Urinals.goodString(""));
+        assertFalse(Urinals.goodString("11111111111111111111111111111111"));
+        assertFalse(Urinals.goodString("92393921419204"));
+        assertFalse(Urinals.goodString("     "));
+        assertFalse(Urinals.goodString("12417sd"));
     }
 
     @Test
     void countUrinals() {
-        Urinals urinals = new Urinals();
-        assertEquals(1, urinals.countUrinals("10001"));
-        assertEquals(0, urinals.countUrinals("1001"));
-        assertEquals(3, urinals.countUrinals("00000"));
-        assertEquals(2, urinals.countUrinals("0000"));
-        assertEquals(1, urinals.countUrinals("01000"));
-        assertEquals(-1,urinals.countUrinals("011"));
-        assertEquals(-1, urinals.countUrinals("100201"));
-        assertEquals(-1, urinals.countUrinals("00000000000000000000000000000000"));
-        assertEquals(-1, urinals.countUrinals(""));
-        assertEquals(-1, urinals.countUrinals("11111111111111111111111111111111"));
-        assertEquals(-1, urinals.countUrinals("10001100010"));
-        assertEquals(-1, urinals.countUrinals("     "));
-
-
+        assertEquals(1, Urinals.countUrinals("10001"));
+        assertEquals(0, Urinals.countUrinals("1001"));
+        assertEquals(3, Urinals.countUrinals("00000"));
+        assertEquals(2, Urinals.countUrinals("0000"));
+        assertEquals(1, Urinals.countUrinals("01000"));
+        assertEquals(-1,Urinals.countUrinals("011"));
+        assertEquals(-1, Urinals.countUrinals("100201"));
+        assertEquals(-1, Urinals.countUrinals("00000000000000000000000000000000"));
+        assertEquals(-1, Urinals.countUrinals(""));
+        assertEquals(-1, Urinals.countUrinals("11111111111111111111111111111111"));
+        assertEquals(-1, Urinals.countUrinals("10001100010"));
+        assertEquals(-1, Urinals.countUrinals("     "));
     }
 
     @Test()
