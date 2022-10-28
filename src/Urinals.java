@@ -1,4 +1,6 @@
 import java.io.File;
+import java.util.regex.Pattern;
+import java.util.regex.Matcher;
 
 /**
  * @author Harsha Vardhan Mupparaju
@@ -11,7 +13,13 @@ public class Urinals {
        return file.getAbsolutePath().endsWith("/Urinals.dat");
    }
 
+   public boolean goodString(String input){
+       Pattern p = Pattern.compile("^[0-1]{1,20}$");
+       Matcher m = p.matcher(input);
+       return m.matches();
+   }
+
     public static void main(String[] args) {
-        System.out.println("Hello world!");
+
     }
 }
