@@ -13,9 +13,9 @@ public class Urinals {
 
     static List<String> urinalList = new ArrayList<>();
 
-   public boolean checkIfFileExists(String resource){
+   public static boolean checkIfFileExists(String resource){
        try {
-           File file = new File(Objects.requireNonNull(getClass().getClassLoader().getResource(resource)).getFile());
+           File file = new File(Objects.requireNonNull(Urinals.class.getClassLoader().getResource(resource)).getFile());
            return file.getAbsolutePath().endsWith("/"+resource);
        } catch (NullPointerException e){
            return false;
@@ -62,6 +62,7 @@ public class Urinals {
        }
    }
 
+
     public static void main(String[] args) {
         File myObj = new File("src/Urinals.dat");
         try{
@@ -71,16 +72,27 @@ public class Urinals {
                 urinalList.add(data);
             }
             myReader.close();
-            try (FileWriter writer = new FileWriter("src/rule.txt");
-                 BufferedWriter bw = new BufferedWriter(writer)){
+
+            String fileName = "src/rule.txt";
+            File outputFile = new File(fileName);
+
+            int count = 1;
+
+            while (outputFile.exists()) {
+                outputFile = new File("src/rule" + count + ".txt");
+                System.out.println("src/rule" + count + ".txt");
+                count++;
+            }
+            try {
+                FileWriter writer = new FileWriter(outputFile);
                 for (String str : urinalList) {
-                    String freeUrinals = String.valueOf(countUrinals(str));
-                    bw.write(freeUrinals+"\n");
+                    writer.write(countUrinals(str)+"\n");
                 }
-                } catch(Exception e){
-                    System.out.println("An error occurred.");
-                    e.printStackTrace();
-                }
+                writer.close();
+            } catch (IOException e) {
+                throw new RuntimeException("File does not exist");
+            }
+
         } catch (FileNotFoundException e) {
             System.out.println("An error occurred.");
             e.printStackTrace();

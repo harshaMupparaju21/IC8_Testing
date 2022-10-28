@@ -8,14 +8,13 @@ public class UrinalsTest {
     @Test()
     void checkIfFileExists(){
         try {
-            Urinals urinals = new Urinals();
-            assertTrue(urinals.checkIfFileExists("Urinals.dat"));
-            assertTrue(urinals.checkIfFileExists("rule.txt"));
-            assertFalse(urinals.checkIfFileExists("urinal.dat"));
-            assertFalse(urinals.checkIfFileExists("urinals.txt"));
-            assertFalse(urinals.checkIfFileExists("rule.dat"));
-            assertFalse(urinals.checkIfFileExists("harsha.dat"));
-        } catch (NullPointerException e){
+            assertTrue(Urinals.checkIfFileExists("Urinals.dat"));
+            assertTrue(Urinals.checkIfFileExists("rule.txt"));
+            assertFalse(Urinals.checkIfFileExists("urinal.dat"));
+            assertFalse(Urinals.checkIfFileExists("urinals.txt"));
+            assertFalse(Urinals.checkIfFileExists("rule.dat"));
+            assertFalse(Urinals.checkIfFileExists("harsha.dat"));
+        } catch (Exception e){
             System.out.println("File does not exist");
         }
     }
